@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  background-color: #1b263b;
+  font-family: "Anek Devanagari", sans-serif;
+}
+
+.correct {
+  background-color: green;
+}
+
+.wrong {
+  background-color: red;
+}
