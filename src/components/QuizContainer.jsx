@@ -23,6 +23,7 @@ export default function QuizContainer({ quizData, onRestart }) {
         setSelection(null);
         setAlreadySelectedCorrectAnswer(false);
         setQuestionNum((prev) => {
+          console.log("normal skip");
           const nextQuestionNum = prev + 1;
           if (nextQuestionNum >= quizData.length) {
             return prev + 1;
@@ -44,7 +45,17 @@ export default function QuizContainer({ quizData, onRestart }) {
     onRestart();
   }
 
-  console.log(questionNum);
+  function handleTimerIsUp() {
+    setSelection(null);
+    setAlreadySelectedCorrectAnswer(false);
+    setQuestionNum((prev) => {
+      const nextQuestionNum = prev + 1;
+      if (nextQuestionNum >= quizData.length) {
+        return prev + 1;
+      }
+      return nextQuestionNum;
+    });
+  }
 
   return (
     <div className="flex flex-col items-center">
@@ -58,6 +69,7 @@ export default function QuizContainer({ quizData, onRestart }) {
             hasFoundAnswer={alreadySelectedCorrectAnswer}
             selection={selection}
             handleSelection={handleSelection}
+            handleTimerIsUp={handleTimerIsUp}
           />
         )}
       </div>

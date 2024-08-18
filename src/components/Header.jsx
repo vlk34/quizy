@@ -8,7 +8,7 @@ export default function Header() {
         alt="question-list-icon"
         className="w-1/3 mb-8 ml-6 drop-shadow-xl"
       />
-      <h1 className="text-4xl text-custom1 mb-10">Quizy</h1>
+      <h1 className="text-4xl text-custom1 mb-6">Quizy</h1>
     </div>
   );
 }
