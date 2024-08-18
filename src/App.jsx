@@ -5,7 +5,6 @@ import quizData from "./assets/quizData";
 import { useState } from "react";
 
 // add a timer to each question
-// maybe display score realtime
 // make the correct answer green when selected, it overlaps with the hover effect
 
 function App() {

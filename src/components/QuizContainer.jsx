@@ -2,10 +2,6 @@ import { useState } from "react";
 import Quiz from "./Quiz";
 import Finish from "./Finish";
 
-// #1 after all questions finish we try reading undefined and crash, we should give the score and say restart?
-// #2 if you click multiple times multiple timeouts get called and you skip that many questions. (kind of done i guess it works)
-let alreadySelectedCorrectAnswer = false;
-
 export default function QuizContainer({ quizData, onRestart }) {
   const [questionNum, setQuestionNum] = useState(0);
   const [selection, setSelection] = useState(null);
@@ -52,16 +48,25 @@ export default function QuizContainer({ quizData, onRestart }) {
 
   return (
     <div className="flex flex-col items-center">
-      {questionNum >= quizData.length ? (
-        <Finish score={Math.ceil(score)} restart={restart} />
+      <div className="flex flex-col items-center mb-4">
+        {questionNum >= quizData.length ? (
+          <Finish score={Math.ceil(score)} restart={restart} />
+        ) : (
+          <Quiz
+            quizData={quizData}
+            num={questionNum}
+            hasFoundAnswer={alreadySelectedCorrectAnswer}
+            selection={selection}
+            handleSelection={handleSelection}
+          />
+        )}
+      </div>
+      {questionNum < quizData.length ? (
+        <p className="text-2xl text-custom1 bg-custom5 px-6 pt-3 pb-1 rounded-md drop-shadow-sm">
+          Your score: {Math.ceil(score)}
+        </p>
       ) : (
-        <Quiz
-          quizData={quizData}
-          num={questionNum}
-          hasFoundAnswer={alreadySelectedCorrectAnswer}
-          selection={selection}
-          handleSelection={handleSelection}
-        />
+        <></>
       )}
     </div>
   );
