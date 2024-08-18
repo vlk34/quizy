@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Button from "./Button";
-import Finish from "./Finish";
+import Timer from "./Timer";
 
 export default function Quiz({
   quizData,
@@ -10,35 +10,14 @@ export default function Quiz({
   handleSelection,
   handleTimerIsUp,
 }) {
-  const [timer, setTimer] = useState(11000);
-
-  useEffect(() => {
-    if (selection) {
-      return;
-    }
-
-    if (timer <= 0) {
-      handleTimerIsUp();
-      return;
-    }
-
-    const interval = setInterval(() => {
-      setTimer((prevTime) => prevTime - 10);
-    }, 10);
-
-    return () => clearInterval(interval);
-  }, [timer, selection]);
-
-  useEffect(() => {
-    setTimer(11000);
-  }, [num]);
-
   return (
     <section className="flex flex-col items-center text-custom1 w-full">
       {!selection ? (
-        <span className="text-2xl text-custom1 mb-4">
-          Timer: {Math.floor(timer / 1000)} seconds
-        </span>
+        <Timer
+          selection={selection}
+          handleTimerIsUp={handleTimerIsUp}
+          num={num}
+        />
       ) : (
         <></>
       )}

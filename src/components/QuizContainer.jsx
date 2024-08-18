@@ -15,20 +15,17 @@ export default function QuizContainer({ quizData, onRestart }) {
     const currentQuestion = quizData[questionNum];
 
     if (option === currentQuestion.correctAnswer) {
+      // set states
       setSelection(true);
       setAlreadySelectedCorrectAnswer(true);
       setScore((prevScore) => prevScore * 5.75);
 
+      // cooldown between questions
       setTimeout(() => {
         setSelection(null);
         setAlreadySelectedCorrectAnswer(false);
         setQuestionNum((prev) => {
-          console.log("normal skip");
-          const nextQuestionNum = prev + 1;
-          if (nextQuestionNum >= quizData.length) {
-            return prev + 1;
-          }
-          return nextQuestionNum;
+          return prev + 1;
         });
       }, 3000);
     } else {
@@ -49,11 +46,7 @@ export default function QuizContainer({ quizData, onRestart }) {
     setSelection(null);
     setAlreadySelectedCorrectAnswer(false);
     setQuestionNum((prev) => {
-      const nextQuestionNum = prev + 1;
-      if (nextQuestionNum >= quizData.length) {
-        return prev + 1;
-      }
-      return nextQuestionNum;
+      return prev + 1;
     });
   }
 
